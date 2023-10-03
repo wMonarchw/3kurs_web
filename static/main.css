@@ -1,0 +1,93 @@
+img{
+    position: relative;
+    left: 300px;
+}
+
+body {
+    background-color: lightblue;
+    color: rgb(55, 0, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+}
+
+header {
+    background: linear-gradient(to right bottom,  blue, blueviolet, pink, steelblue);
+    color: lightgreen;
+    padding: 10px;
+    font-size: 16pt;
+}
+
+footer {
+    background-color: black;
+    color: lightgreen;
+    padding: 10px;
+    font-size: 16pt;
+    text-align: right;
+    transition: 700ms;
+    bottom: 0;
+    position: fixed;
+    right: 0;
+    width: 100%;
+}
+
+footer:hover {
+    font-size: 24pt;
+    text-align: right;
+    color: greenyellow;
+    padding: 10px;
+    transition: 700ms;
+
+}
+
+a {
+    transition: 600ms;
+}
+
+a:visited {
+    color:dimgrey;
+    background-color: blueviolet;
+}
+
+a:hover {
+    color:red;
+    text-decoration: underline;
+    background-color: white;
+    font-weight: bold;
+    transition: 300ms;
+    text-shadow: 6px 4px 2px black;
+}
+
+a:active {
+    color: white;
+    background-color: green;
+
+}
+
+main{
+    margin: 10px 20px;
+}
+li{
+    list-style-type: none;
+    font-size: 20px;
+}
+#labs{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+#rout{
+    margin-left: 20px;
+}
+#ngtu{
+    width: 100px;   
+    height: 50px;
+    position: relative;
+    bottom: 30px;
+}
+
+#python{
+    
+}
+.images{
+    position: relative;
+    right: 300px;
+}
