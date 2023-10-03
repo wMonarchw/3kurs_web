@@ -160,4 +160,6 @@ def choice():
 @app.route('/lab2/example')
 def example():
     name = 'Завгородний Илья Артурович'
-    return render_template('laba2.html', name=name)
+    number_labolatory = '2'
+    number_course = '3'
+    return render_template('laba2.html', name=name, number_labolatory=number_labolatory,number_course=number_course)
