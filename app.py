@@ -161,5 +161,6 @@ def choice():
 def example():
     name = 'Завгородний Илья Артурович'
     number_labolatory = '2'
-    number_course = '3'
-    return render_template('laba2.html', name=name, number_labolatory=number_labolatory,number_course=number_course)
+    number_course = '3 курс'
+    group = 'ФБИ-14'
+    return render_template('laba2.html', name=name, number_labolatory=number_labolatory,number_course=number_course,group=group)

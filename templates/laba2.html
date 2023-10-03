@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        Нгту, ФБ, Лабораторная {{ number_labolatory }}
+        Нгту, ФБ, {% if number_labolatory %} Лабораторная 2 {% endif %}
     </header>
     <main>
         5 + 2 = {{ 5 + 2 }}<br>
@@ -16,7 +16,19 @@
         45**8 = {{ 45**8 }}<br>
     </main>
     <footer>
-        &copy; {{ name }}, ФБИ-14, {{ number_course }} курс, 2023
+        &copy; 
+        {% if name == name %}
+            {{name}},
+        {% else %} 
+            Анонимус,
+        {% endif %}
+        {{group}},
+        {% if number_course %}
+            {{ number_course}},
+        {% else %}
+            никакой курс, 
+        {% endif %} 
+        2023
     </footer>
 </body>
 </html>
