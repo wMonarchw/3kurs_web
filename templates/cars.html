@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная 2{% endblock %}
+
+{% block main%}
+    <div>
+        <div> Все машинки</div>
+        <div>
+            <h1> Машина 1</h1>
+            <div class="images"><img src="{{ url_for('static', filename='car1.jpg') }}" width="400px", height="200px"></div>
+            <div>Описание: Синяя машина - вау!</div>
+        </div>
+        <div>
+            <h1> Машина 2</h1>
+            <div class="images"><img src="{{ url_for('static', filename='car2.jpg') }}" width="400px", height="200px"></div>
+            <div>Описание: Серая машина - вау!</div>
+        </div>
+        <div>
+            <h1> Машина 3</h1>
+            <div class="images"><img src="{{ url_for('static', filename='car3.jpg') }}" width="400px", height="200px"></div>
+            <div>Описание: Серая машина едет в горах - вау!</div>
+        </div>
+        <div>
+            <h1> Машина 4</h1>
+            <div class="images"><img src="{{ url_for('static', filename='car4.jpg') }}" width="400px", height="200px"></div>
+            <div>Описание: Красная машина катит в пустыне - вау!</div>
+        </div>
+        <div>
+            <h1> Машина 5</h1>
+            <div class="images"><img src="{{ url_for('static', filename='car5.jpg') }}" width="400px", height="200px"></div>
+            <div>Описание: Синяя машина стоит в ацтекском храме - вау!</div>
+        </div>
+    </div>
+{% endblock %}
