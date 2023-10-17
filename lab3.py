@@ -72,5 +72,6 @@ def ticket_buyed():
     age = int(age)
     if age < 18 or age > 120:
             return "<script>alert('Возраст введен некоректно!'); window.location='/lab3/ticket'</script>"
-    
+    else: 
+        pass
     return render_template('ticket_buyed.html', name=name, age=age, ticket_type=ticket_type, berth=berth, luggage=luggage, departure=departure, destination=destination, date=date)
