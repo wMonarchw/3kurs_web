@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{% block main %}
+
+    <h1>Форма покупки железнодорожного билета</h1>
+    <form action="/lab3/ticket_buyed">
+        <label for="name">ФИО пассажира:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" name="age"><br><br>
+        <label for="ticket_type">Тип билета:</label>
+        <select id="ticket_type" name="ticket_type">
+            <option value="adult">Взрослый</option>
+            <option value="child">Детский</option>
+        </select><br><br>
+        <label for="berth">Полка:</label>
+        <select id="berth" name="berth">
+            <option value="lower">Нижняя</option>
+            <option value="upper">Верхняя</option>
+            <option value="upper_side">Верхняя боковая</option>
+            <option value="lower_side">Нижняя боковая</option>
+        </select><br><br>
+        <label for="luggage">С багажом:</label>
+        <input type="checkbox" id="luggage" name="luggage"><br><br>
+        <label for="departure">Пункт выезда:</label>
+        <input type="text" id="departure" name="departure"><br><br>
+        <label for="destination">Пункт назначения:</label>
+        <input type="text" id="destination" name="destination"><br><br>
+        <label for="date">Дата поездки:</label>
+        <input type="text" id="date" name="date"><br><br>
+        <input type="submit" value="Купить билет">
+    </form>
+
+    <div style="margin-top: 30px;">
+        <a href="/lab3/">Вернуться к Lab3</a>
+    </div>
+
+{% endblock %}

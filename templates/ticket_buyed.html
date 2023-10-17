@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{% block main %}
+
+    <h1>Билет</h1>
+    <p>ФИО пассажира: {{ name }}</p>
+    <p>Возраст: {{ age }}</p>
+    <p>Тип билета: {{ 'взрослый' if ticket_type == 'adult' else 'детский' }}</p>
+    <p>Полка: {% if berth == 'lower' %} <label>Нижняя</label> {% elif berth == 'upper '%} <label>Верхняя</label> {% elif berth =='upper_side' %} <label>Верхняя боковая</label> {% else %} <label>Нижняя боковая</label> {% endif %}</p>
+    <p>С багажом: {{ 'Да' if lagguage == 'on' else 'нет' }}</p>
+    <p>Пункт выезда: {{ departure }}</p>
+    <p>Пункт назначения: {{ destination }}</p>
+    <p>Дата поездки: {{ date }}</p>
+
+    <a href="/lab3/ticket">Вернуться к покупке билета</a>
+
+{% endblock %}

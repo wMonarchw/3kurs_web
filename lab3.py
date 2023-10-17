@@ -43,6 +43,34 @@ def pay():
 
     return render_template('pay.html', price=price)
 
+
 @lab3.route('/lab3/success')
 def success():
     return render_template('success.html')
+
+
+@lab3.route('/lab3/ticket')
+def ticket():
+    return render_template('ticket.html')
+
+
+@lab3.route('/lab3/ticket_buyed')
+def ticket_buyed():
+    name = request.args.get('name')
+    age = request.args.get('age')
+    ticket_type = request.args.get('ticket_type')
+    berth = request.args.get('berth')
+    luggage = request.args.get('luggage')
+    departure = request.args.get('departure')
+    destination = request.args.get('destination')
+    date = request.args.get('date')
+    
+    if not all([name, age, departure, destination, date]):
+        return "<script>alert('Пожалуйста, заполните все поля'); window.location='/lab3/ticket'</script>"
+    else:
+        pass
+    age = int(age)
+    if age < 18 or age > 120:
+            return "<script>alert('Возраст введен некоректно!'); window.location='/lab3/ticket'</script>"
+    
+    return render_template('ticket_buyed.html', name=name, age=age, ticket_type=ticket_type, berth=berth, luggage=luggage, departure=departure, destination=destination, date=date)
