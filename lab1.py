@@ -23,6 +23,8 @@ def menu():
         <div id='labs'>
             <li><a href='/lab1'>Лабораторная 1</a></li>
             <li><a href='/lab2/'>Лабораторная 2</a></li>
+            <li><a href='/lab3/'>Лабораторная 3</a></li>
+            <li><a href='/lab4/'>Лабораторная 4</a></li>
         </div>
         <div id='rout'>
             <h1>Реализованные Роуты</h1>
