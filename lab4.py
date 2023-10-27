@@ -28,3 +28,24 @@ def login():
 
     return render_template("login.html", error=error, username=username, password=password)
 
+@lab4.route('/lab4/freeze/', methods=['GET', 'POST'])
+def freeze():
+    if request.method == 'GET':
+        return render_template("freeze.html")
+    
+    temperature = request.form.get('temperature')
+    message = None
+    if not temperature:
+        message = 'Не задана температура'
+    elif int(temperature) < -12:
+        message = 'Не удалось установить температуру слишком низкое значение'
+    elif int(temperature) > -1: 
+        message = 'Не удалось установить температуру слишком высокое значение'
+    elif int(temperature) >=-12 and int(temperature) <=-9:
+        message = f"Установлена температура {temperature} ***"
+    elif int(temperature) >=-8 and int(temperature) <=-5:
+        message = f"Установлена температура {temperature} **"
+    elif int(temperature) >=-4 and int(temperature) <=-1:
+        message = f"Установлена температура {temperature} *"     
+    
+    return render_template('freeze.html', temperature=temperature, message=message)
