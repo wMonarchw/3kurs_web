@@ -47,5 +47,46 @@ def freeze():
         message = f"Установлена температура {temperature} **"
     elif int(temperature) >=-4 and int(temperature) <=-1:
         message = f"Установлена температура {temperature} *"     
-    
+
     return render_template('freeze.html', temperature=temperature, message=message)
+
+@lab4.route('/lab4/zerno/', methods=['GET', 'POST'])
+def zerno():
+    if request.method == 'GET':
+        return render_template("zerno.html")
+
+    zerno = request.form.get('zerno')
+    zerno_weight = request.form.get('zerno_weight')
+    zerno_weight = float(zerno_weight)
+    message = None
+    price = 0
+
+    if zerno == 'yachmen':
+        price = 12000
+    elif zerno == 'oves':
+        price = 8500
+    elif zerno == 'psheno':
+        price = 8700
+    elif zerno == 'rozj':
+        price = 14000
+    else:
+        price = 0
+    
+    sum = price * zerno_weight
+    discount = None
+    if zerno_weight > 50:
+        sum = (price * zerno_weight) * 0.9
+        discount = (price * zerno_weight) * 0.1 
+        message = f'За взятый объем свыше 50 тонн присовена скидка = {discount} руб. Финальная цена товара составит = {sum}руб.'
+    elif zerno_weight <= 50:
+        message = f'Цена товаров = {sum}руб.'
+    elif zerno_weight >= 500:
+        message = 'Такого обьема зерна нет в наличии'
+    elif not zerno_weight:
+        message = 'Невведен вес'
+    elif zerno_weight == 0:
+        message = 'Неккоректное значение веса'
+    else:
+        pass
+
+    return render_template('zerno.html', zerno=zerno, zerno_weight=zerno_weight, message=message, price=price)
