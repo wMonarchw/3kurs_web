@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css' ) }}">
     <title>Завгородний Илья Артурович {% block lab %}{% endblock %}</title>
-    {% if request.cookies.get('color') %}
+    {% if color %}
     <style>
 
         body{
-            color: {{ request.cookies.get('color') }};
+            color: {{ color }};
+            background-color: {{ backgroundColor }};
+            font-size: {{ fontSize }}px;
         }
-        
+
     </style>
     {% endif %}
 
 </head>
+
 <body>
     <header>
         WEB-программирование, часть 2. {{ self.lab() }}

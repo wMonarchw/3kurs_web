@@ -94,11 +94,32 @@ def zerno():
 @lab4.route('/lab4/cookies', methods=['GET', 'POST'])
 def cookies():
     if request.method == 'GET':
-        return render_template("cookies.html")
+        color = request.cookies.get('color')
+        backgroundColor = request.cookies.get('background-color')
+        fontSize = request.cookies.get('font-size')
+        return render_template("cookies.html", color=color, backgroundColor=backgroundColor, fontSize=fontSize)
     color = request.form.get('color')
+    backgroundColor = request.form.get('backgroundColor')
+    fontSize = request.form.get('fontSize')
+    error = None
+    if color == backgroundColor:
+        error = 'Ошибка одинаковые цвета фона и текста'
+
+    cookies = {
+        'color': color,
+        'background-color': backgroundColor,
+        'font-size': fontSize
+    }
+
+    cookie_str = ''
+    for key, value in cookies.items():
+        if value:
+            cookie_str += f'{key}={value};' 
+
     headers = {
-        'Set-Cookie': 'color=' + color + '; path=/',
+        'Set-Cookie': cookie_str + 'path=/',
         'Location': '/lab4/cookies'
     }
+
     return '', 303, headers
 
