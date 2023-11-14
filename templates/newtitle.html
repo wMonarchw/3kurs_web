@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block lab %} Лабораторная работа 5 {% endblock %}
+
+{% block main %}
+    <div class="databaselab5">
+        <div>
+            Пользователь: {% if username %} {{ username }} {% else %} Anonim {% endif %}
+        </div>
+        <form action="/lab5/articles">
+            <button class="button_user" type="submit">Заметки</button>
+        </form>
+        <form action="/lab5/newtitle">
+            <button class="button_user" type="submit">Создать заметки</button>
+        </form>
+        <form action="/lab5/login5">
+            <button class="button_user" type="submit">Логин</button>
+        </form>
+        <form action="/lab5/register">
+            <button class="button_user" type="submit">Регистрация</button>
+        </form>
+        <form action="/lab5/logout">
+            <button class="button_user" type="submit">Выйти</button>
+        </form>
+
+        <div class="oform_zam">
+            <h1>Новая заметка</h1>
+    
+            <form method="post">
+                <div>
+                    <input type="text" name="article_title" placeholder="Название статьи">
+                </div> 
+                <div>                                                                                              
+                    <textarea name="article_text" placeholder="Текст статьи" rows="20"></textarea>
+                </div>
+                <div>
+                    <div>Сделать публичным?</div>
+                    <input type="radio" name="usl"  value="yes">Да 
+                    <input type="radio" name="usl"  value="no"> Нет
+                </div>
+                <div>
+                    <input type="submit" value="Apply"/>
+                </div>
+                <div style="margin-bottom: 100px;"></div>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
