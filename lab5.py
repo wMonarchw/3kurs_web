@@ -247,4 +247,4 @@ def list_articles():
 @lab5.route('/lab5/logout')
 def logout():
     session.clear()
-    return render_template('databaselab5.html')
+    return render_template('lab5.html')
