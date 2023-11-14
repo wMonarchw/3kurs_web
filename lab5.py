@@ -39,11 +39,8 @@ def users():
 
     cur.close()
     conn.close()
-    user0 = users[0][1]
-    user1 = users[1][1]
-    user2 = users[2][1]
-    user3 = users[3][1]
-    return render_template("users.html", user0=user0, user1=user1, user2=user2, user3=user3)
+    user_list = [user[1] for user in users]
+    return render_template("users.html", user_list=user_list)
 
 @lab5.route('/lab5/register', methods = ['GET', 'POST'])
 def registerPage():
@@ -231,7 +228,7 @@ def list_articles():
         conn = dbConnect()
         cur = conn.cursor()
         
-        cur.execute("SELECT id, title, is_favorite FROM articles WHERE user_id = %s ORDER BY is_favorite DESC;", (userID,))
+        cur.execute("SELECT id, title, is_favorite, is_public FROM articles WHERE user_id = %s OR is_public = True ORDER BY is_favorite DESC;", (userID,))
         articles_data = cur.fetchall()
         
         articles = [{'id': row[0], 'title': row[1], 'is_favorite': row[2]} for row in articles_data]
