@@ -1,5 +1,8 @@
 from flask import Blueprint, redirect, url_for, render_template, Blueprint, request, session
 import psycopg2
+from werkzeug.security import check_password_hash, generate_password_hash
+
+
 lab5 = Blueprint('lab5', __name__)
 
 def dbConnect():
@@ -48,7 +51,7 @@ def registerPage():
 
     if request.method == "GET":
         return render_template('register.html', errors=errors)
-
+     
     username = request.form.get("username")
     password = request.form.get("password")
 
@@ -65,20 +68,72 @@ def registerPage():
         errors.append("Пожалуйста заполните все поля")
         print(errors)
         return render_template('register.html', errors=errors)
+    
+    hashPassword = generate_password_hash(password)
 
     conn = dbConnect()
     cur = conn.cursor()
 
-    cur.execute(f"SELECT username FROM users WHERE username = '{username}';")
+    cur.execute("SELECT username FROM users WHERE username = %s;", (username,))
 
     if cur.fetchone() is not None:
         errors.append("Пользователь с данным именем уже существует")
 
-        dbClose(cur, conn)
+        conn.close()
+        cur.close()
         return render_template('register.html', errors=errors)
-
-    cur.execute(f"INSERT INTO users (username, password) VALUES ('{username}', '{password}');")
-
+    
+    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s);", (username, hashPassword))
+    
     conn.commit()
-    dbClose(cur, conn)
-    return redirect("/lab5/users")
+    conn.close()
+    cur.close()
+    return redirect("/lab5/login5")
+
+@lab5.route('/lab5/login5', methods=["GET", "POST"])
+def login5():
+    errors = []
+
+    if request.method == "GET":
+        return render_template("login5.html", errors=errors)
+    
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    if not (username or password):
+        errors.append("Пожалуйста заполните все поля")
+        return render_template("login5.html", errors=errors)
+    if username == '':
+        errors.append("Пожалуйста заполните все поля")
+        print(errors)
+        return render_template('login5.html', errors=errors)
+    if password == '':
+        errors.append("Пожалуйста заполните все поля")
+        print(errors)
+        return render_template('login5.html', errors=errors)
+    
+    conn = dbConnect()
+    cur = conn.cursor()
+
+    cur.execute("SELECT id, password FROM users WHERE username = %s;", (username,))
+
+    result = cur.fetchone()
+
+    if result is None:
+        errors.append("Неправильный логин или пароль")
+        dbClose(cur, conn)
+        return render_template("login5.html", errors=errors)
+    
+    userID, hashPassword = result
+
+    if check_password_hash(hashPassword, password):
+        session['id'] = userID
+        session['username'] = username
+        dbClose(cur, conn)
+        return redirect("/lab5/")
+    
+    else:
+        errors.append('Неправильный логин пароль')
+        return render_template('login5.html', errors=errors)
+    
+    
