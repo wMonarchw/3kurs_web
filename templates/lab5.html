@@ -3,9 +3,27 @@
 {% block lab %}Лабораторная 5{% endblock %}
 
 {% block main%}
-    <h1>Flask и БДh1>
-    <div>Тема лабораторной - Flask и БД. Список сделанных страниц:</div>
-    <ol>
-        <li><a href=""></a></li>
-    </ol>
+    <div class="databaselab5">
+        <ol>
+            <h1>Flask и БД<h1></h1>
+            <div>
+                Пользователь: {% if username %} {{ username }} {% else %} Anonim {% endif %}
+            </div>
+            <form action="/lab5/articles">
+                <button class="button_user" type="submit">Заметки</button>
+            </form>
+            <form action="/lab5/newtitle">
+                <button class="button_user" type="submit">Создать заметки</button>
+            </form>
+            <form action="/lab5/login5">
+                <button class="button_user" type="submit">Логин</button>
+            </form>
+            <form action="/lab5/register">
+                <button class="button_user" type="submit">Регистрация</button>
+            </form>
+            <form action="/lab5/logout">
+                <button class="button_user" type="submit">Выйти</button>
+            </form>
+        </ol>
+    </div>
 {% endblock %}
