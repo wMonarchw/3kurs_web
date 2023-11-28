@@ -1,11 +1,17 @@
-from flask import Blueprint, redirect, url_for, render_template, Blueprint, request, session
+from flask import Blueprint, redirect, url_for, render_template, request, session
 from Db import db
 
 from Db.models import users, articles
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user, login_required, current_user, logout_user
 
 lab6 = Blueprint('lab6', __name__)
+
+
+@lab6.route('/lab6/')
+def lab():
+    username_form = request.form.get('username')
+    return render_template('lab6.html', username_form=username_form)
 
 @lab6.route('/lab6/check')
 def main():
@@ -97,7 +103,81 @@ def login():
     return render_template('login6.html')
 
 
-@lab6.route('/lab6/articles')
-def articles():
-    my_articles = articles.query.filter_by(user_id=current_user.id).all()
-    return render_template('articles.html', articles=my_articles)
+@lab6.route('/lab6/articles', methods = ['GET', 'POST'])
+@login_required
+def view_articles():
+    username_form = request.form.get('username')
+    my_articles = articles.query.filter((articles.user_id == current_user.id) | (articles.is_public == True)).order_by(articles.is_favorite.desc()).all()
+    print(my_articles)
+    return render_template('articles6.html', articles=my_articles, username_form = username_form)
+
+
+@lab6.route("/lab6/newtitle", methods=["GET", "POST"])
+@login_required
+def createArticle():
+    if request.method == "GET":
+        return render_template("newtitle.html")
+
+    article_text = request.form.get("article_text")
+    title = request.form.get("article_title")
+    option = request.form.get("usl")
+
+    if len(article_text) == 0:
+        errors = ["Заполните текст"]
+        return render_template("new_article.html", errors=errors)
+
+    new_article = articles(user_id=current_user.id, title=title, article_text=article_text)
+    
+    if option == 'yes':
+        new_article.is_public = True
+    else:
+        new_article.is_public = False
+
+    db.session.add(new_article)
+    db.session.commit()
+
+    return redirect("/lab6/articles")
+
+
+@lab6.route("/lab6/articles/<int:article_id>", methods=['GET', 'POST'])
+def getArticle(article_id):
+    if current_user.is_authenticated:
+        if request.method == 'POST':
+            favorite = request.form.get('favorite')
+            likes = request.form.get('likes')
+
+            article = articles.query.filter_by(id=article_id).first()
+
+
+            if likes == 'Лайк':
+                if article.likes is None:
+                        article.likes = 0
+                else:
+                    article.likes += 1
+
+            if favorite == 'yes':
+                article.is_favorite = True
+            else:
+                article.is_favorite = False
+
+            db.session.commit()
+
+        article = articles.query.filter_by(id=article_id).first()
+
+        if article:
+            if article.user_id == current_user.id or article.is_public:
+                text = article.article_text.splitlines()
+                likes_count = article.likes
+                return render_template("6articleN.html", article_text=text, article_title=article.title, username=current_user.username, favorite=article.is_favorite, likes_count=likes_count)
+            else:
+                return "У вас нет доступа к этой статье"
+        else:
+            return "Статья не найдена"
+    else:
+        return "Пожалуйста, войдите, чтобы увидеть эту статью"
+
+@lab6.route('/lab6/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/lab6')

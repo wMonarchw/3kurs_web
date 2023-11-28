@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block lab %} Лабораторная работа 6 {% endblock %}
+
+{% block main %}
+    <div class="databaselab6">
+        <div>
+        Пользователь: {% if current_user.username %} {{ current_user.username }} {% else %} Anonim {% endif %}
+        </div>
+        <form action="/lab6/articles">
+            <button class="button_user" type="submit">Заметки</button>
+        </form>
+        <form action="/lab6/newtitle">
+            <button class="button_user" type="submit">Создать заметки</button>
+        </form>
+        <form action="/lab6/login">
+            <button class="button_user" type="submit">Логин</button>
+        </form>
+        <form action="/lab6/register">
+            <button class="button_user" type="submit">Регистрация</button>
+        </form>
+        <form action="/lab6/logout">
+            <button class="button_user" type="submit">Выйти</button>
+        </form>
+
+        <div>
+            <h1>{{ article_title }}</h1>
+            {% for paragraph in article_text %}
+            <p> {{ paragraph }} </p>
+            {% endfor %}
+        </div>
+        <form action="" method="post">
+        <div>
+            <div>Добавить в избранное?</div>
+                <input type="radio" name="favorite"  value="yes">Да 
+                <input type="radio" name="favorite"  value="no"> Нет
+                <input type="submit" value="Apply">
+            </div>
+            <div>
+                <input type="submit" name="likes" value="Лайк">
+            </div>
+        </form>
+        <div>
+            Количество лайков: {{ likes_count }}
+        </div>
+    </div>
+
+
+
+{% endblock %}
