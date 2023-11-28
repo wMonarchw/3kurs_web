@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная 5{% endblock %}
+
+{% block main%}
+    <h1>Страница регистрации</h1>
+    <form action="" method="post">
+        <div>
+            {% for error in errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <div class="input_label">
+            <input type="text" name="username" placeholder="username">
+            <label for="username">Логин</label>
+        </div>
+        
+        <div class="input_label">
+            <input type="text" name="password" placeholder="password">
+            <label for="password">Пароль</label>
+        </div>
+        <button type="submit" class="button_user">Зарегистрироваться</button>
+
+    </form>
+    <form action="/lab6/">
+        <button class="button_user" type="submit">Назад</button>
+    </form>
+
+{% endblock %}
