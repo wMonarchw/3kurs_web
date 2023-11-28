@@ -95,3 +95,9 @@ def login():
         return render_template('login6.html', errors=errors)
 
     return render_template('login6.html')
+
+
+@lab6.route('/lab6/articles')
+def articles():
+    my_articles = articles.query.filter_by(user_id=current_user.id).all()
+    return render_template('articles.html', articles=my_articles)
