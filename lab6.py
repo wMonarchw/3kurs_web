@@ -151,7 +151,7 @@ def getArticle(article_id):
 
             if likes == 'Лайк':
                 if article.likes is None:
-                        article.likes = 0
+                    article.likes = 0
                 else:
                     article.likes += 1
 
