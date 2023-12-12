@@ -240,8 +240,8 @@ def list_articles():
     return redirect("/lab5/login5")
 
 
-
 @lab5.route('/lab5/logout')
 def logout():
     session.clear()
     return render_template('lab5.html')
+
