@@ -28,6 +28,8 @@ def menu():
             <li><a href='/lab5/'>Лабораторная 5</a></li>
             <li><a href='/lab6/'>Лабораторная 6</a></li>
             <li><a href='/lab7/'>Лабораторная 7</a></li>
+            <li><a href='/lab8/'>Лабораторная 8</a></li>
+            <li><a href='/lab9/'>Лабораторная 9</a></li>
         </div>
         <div id='rout'>
             <h1>Реализованные Роуты</h1>
