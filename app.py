@@ -15,6 +15,16 @@ from lab8 import lab8
 from lab9 import lab9
 
 app = Flask(__name__)
+
+@app.errorhandler(404)
+def not_found(err):
+    return 'Нет такой страницы', 404
+
+@app.errorhandler(500)
+def not_found(err):
+    return 'Ошибка', 500
+
+
 app.secret_key = '123'
 user_db = 'admin_knowledge_base_orm'
 host_ip = '127.0.0.1'

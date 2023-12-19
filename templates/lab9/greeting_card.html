@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная 8{% endblock %}
+{% block script %}
+{% endblock %}
+{% block main%}
+    <h1>Новогодняя открытка</h1>
+    <form action="/lab9/greeting_card" method="GET">
+        <label for="recipient_name">Имя получателя:</label>
+        <input type="text" id="recipient_name" name="recipient_name" value="{{ recipient_name }}"><br><br>
+
+        <label for="recipient_gender">Пол получателя:</label>
+        <select id="recipient_gender" name="recipient_gender">
+            <option value="male" {% if recipient_gender == 'male' %}selected{% endif %}>Мужской</option>
+            <option value="female" {% if recipient_gender == 'female' %}selected{% endif %}>Женский</option>
+        </select><br><br>
+
+        <label for="sender_name">Имя отправителя:</label>
+        <input type="text" id="sender_name" name="sender_name" value="{{ sender_name }}"><br><br>
+
+        <input type="submit" value="Отправить">
+    </form>
+
+    {% if recipient_name and recipient_gender and sender_name %}
+        <h2>Поздравление с Новым Годом!</h2>
+        <p>Дорог{{ 'ая' if recipient_gender == 'female' else 'ой' }} {{ recipient_name }},</p>
+        <p>Желаю тебе счастья, здоровья и успехов в новом году!</p>
+        <p>С наилучшими пожеланиями,</p>
+        <p>{{ sender_name }}</p>
+{% endif %}
+{% endblock %}
